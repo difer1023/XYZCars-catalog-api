@@ -1,4 +1,6 @@
 Bundle-Name: XYZCars-catalog-api
 Bundle-SymbolicName: XYZCars.catalog.api
 Bundle-Version: 1.0.0
-Export-Package: com.xyzcars.catalog.api
+Export-Package: \
+	com.xyzcars.catalog.api,\
+	com.xyzcars.catalog.constants

@@ -10,6 +10,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.xyzcars.catalog.api.XYZCarsCatalogApi;
 import com.xyzcars.catalog.config.XYZCarsCatalogConfiguration;
+import com.xyzcars.catalog.constants.XYZCarsCatalogApiKeys;
 import com.xyzcars.catalog.exception.ServiceConsumptionException;
 import com.xyzcars.catalog.rest.RestServiceConsumer;
 
@@ -56,14 +57,14 @@ public class XYZCarsCatalogImpl implements XYZCarsCatalogApi {
 		try {
 			StringBuilder urlBuilder = new StringBuilder(
 					xyzCarsCatalogConfiguration.customerProductRequestServiceUrl());
-			urlBuilder.append(StringPool.QUESTION).append("productId").append(StringPool.EQUAL)
-					.append(productRequestDetails.getString("productId")).append(StringPool.AMPERSAND)
-					.append("customerName").append(StringPool.EQUAL)
-					.append(productRequestDetails.getString("customerName")).append(StringPool.AMPERSAND)
-					.append("customerLastName").append(StringPool.EQUAL)
-					.append(productRequestDetails.getString("customerLastName")).append(StringPool.AMPERSAND)
-					.append("customerQuestions").append(StringPool.EQUAL)
-					.append(URLEncoder.encode(productRequestDetails.getJSONArray("customerQuestions").join(StringPool.COMMA), StandardCharsets.UTF_8.toString()));
+			urlBuilder.append(StringPool.QUESTION).append(XYZCarsCatalogApiKeys.PRODUCT_ID).append(StringPool.EQUAL)
+					.append(productRequestDetails.getString(XYZCarsCatalogApiKeys.PRODUCT_ID)).append(StringPool.AMPERSAND)
+					.append(XYZCarsCatalogApiKeys.CUSTOMER_NAME).append(StringPool.EQUAL)
+					.append(productRequestDetails.getString(XYZCarsCatalogApiKeys.CUSTOMER_NAME)).append(StringPool.AMPERSAND)
+					.append(XYZCarsCatalogApiKeys.CUSTOMER_LAST_NAME).append(StringPool.EQUAL)
+					.append(productRequestDetails.getString(XYZCarsCatalogApiKeys.CUSTOMER_LAST_NAME)).append(StringPool.AMPERSAND)
+					.append(XYZCarsCatalogApiKeys.CUSTOMER_QUESTIONS).append(StringPool.EQUAL)
+					.append(URLEncoder.encode(productRequestDetails.getJSONArray(XYZCarsCatalogApiKeys.CUSTOMER_QUESTIONS).join(StringPool.COMMA), StandardCharsets.UTF_8.toString()));
 			return restServiceConsumer.consumeServiceByPost(urlBuilder.toString());
 		} catch (ServiceConsumptionException | JSONException | UnsupportedEncodingException e) {
 			LOGGER.error(e);
